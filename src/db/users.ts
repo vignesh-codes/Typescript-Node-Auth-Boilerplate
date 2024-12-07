@@ -35,6 +35,10 @@ export class UserDatabase {
         return this.userModel.findOne({ email });
     }
 
+    public getUserByUsername(username: string) {
+        return this.userModel.findOne({ username });
+    }
+
     public getUserBySessionToken(sessionToken: string) {
         return this.userModel.findOne({ 'authentication.sessionToken': sessionToken });
     }

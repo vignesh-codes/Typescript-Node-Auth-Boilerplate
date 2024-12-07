@@ -9,7 +9,7 @@ export const generateJwt = async (user: User):  Promise<string | null> => {
             username: user.username,
             email: user.email
         }
-        const jwtToken = jwt.sign(payload, JWT_SECRET, {expiresIn: "1m"})
+        const jwtToken = jwt.sign(payload, JWT_SECRET, {expiresIn: "1200m"})
         return jwtToken
     } catch(error){
         Logger.Error(error.toString())

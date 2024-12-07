@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "test": "todo"
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "vignesh-codes",

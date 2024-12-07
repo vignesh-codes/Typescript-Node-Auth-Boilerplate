@@ -43,15 +43,21 @@ export class V2AuthController {
 
     public static v2register = async (req: express.Request, res: express.Response) => {
         try {
+            console.log("trying to register here ", req.body)
             const { email, password, username } = req.body;
 
             if (!email || !password || !username) {
-                return res.sendStatus(400);
+                return res.status(400).json({message: "email, password, or username is missing"});
             };
 
             const existingUser = await V2AuthController.userDB.getUserByEmail(email);
             if (existingUser) {
-                return res.sendStatus(400);
+                return res.status(400).json({message: "email already exists"});
+            };
+
+            const existingUsername = await V2AuthController.userDB.getUserByUsername(username);
+            if (existingUsername) {
+                return res.status(400).json({message: "username already exists"});
             };
 
             const salt = random();
@@ -68,7 +74,7 @@ export class V2AuthController {
 
         } catch (error) {
             Logger.Error(error.toString());
-            return res.sendStatus(400);
+            return res.status(400).json({message: error.toString()});
         }
     }
 }
